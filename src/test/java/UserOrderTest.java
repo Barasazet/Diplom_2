@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -5,9 +6,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.praktikum_services.stellar_burgers.steps.Steps;
-import ru.praktikum_services.stellar_burgers.test_data_constructors.CreateOrderData;
-import ru.praktikum_services.stellar_burgers.test_data_constructors.CreateUserData;
+import ru.stellarburgers.steps.Steps;
+import ru.stellarburgers.constructors.CreateOrderData;
+import ru.stellarburgers.constructors.CreateUserData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,8 +20,8 @@ public class UserOrderTest extends BaseTest {
     private String email;
     private String password;
     private String name;
-    private String id1;
-    private String id2;
+    private String firstIngredientId;
+    private String secondIngredientId;
     private Steps steps;
     private String tokenAfterRegistration;
     private String tokenAfterLogin;
@@ -44,16 +45,17 @@ public class UserOrderTest extends BaseTest {
                 .extract()
                 .path("accessToken");
 
-        id1 = steps.getRandomIngredientHash();
-        id2 = steps.getRandomIngredientHash();
+        firstIngredientId = steps.getRandomIngredientHash();
+        secondIngredientId = steps.getRandomIngredientHash();
 
     }
 
     @Test
     @DisplayName("Пользователь может создать заказ")
+    @Description("Пользователь может составить рецепт бургера")
     public void userCanCreateOrder() {
         steps = new Steps();
-        ingredients = Arrays.asList(id1, id2);
+        ingredients = Arrays.asList(firstIngredientId, secondIngredientId);
         createOrderData = new CreateOrderData(ingredients);
 
         loginResponse = steps.userLogin(createUserData, tokenAfterRegistration);
@@ -68,11 +70,12 @@ public class UserOrderTest extends BaseTest {
 
     @Test
     @DisplayName("Пользователь не может создать пустой заказ")
+    @Description("Невозможно создать бургер без ингредиентов")
     public void userCannotCreateEmptyOrder() {
         steps = new Steps();
-        id1 = null;
-        id2 = null;
-        ingredients = Arrays.asList(id1, id2);
+        firstIngredientId = null;
+        secondIngredientId = null;
+        ingredients = Arrays.asList(firstIngredientId, secondIngredientId);
         createOrderData = new CreateOrderData(ingredients);
 
         loginResponse = steps.userLogin(createUserData, tokenAfterRegistration);

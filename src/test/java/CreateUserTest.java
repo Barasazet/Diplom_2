@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -5,8 +6,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.praktikum_services.stellar_burgers.steps.Steps;
-import ru.praktikum_services.stellar_burgers.test_data_constructors.CreateUserData;
+import ru.stellarburgers.steps.Steps;
+import ru.stellarburgers.constructors.CreateUserData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -32,6 +33,7 @@ public class CreateUserTest extends BaseTest {
 
     @Test
     @DisplayName("Регистрация пользователя")
+    @Description("Успешная регистрация при использовании валидных email, имени и пароля")
     public void shouldCreateUser() {
         createUserData = new CreateUserData(email, password, name);
         steps = new Steps();

@@ -1,4 +1,4 @@
-package ru.praktikum_services.stellar_burgers.test_data_constructors;
+package ru.stellarburgers.constructors;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package ru.praktikum_services.stellar_burgers.steps;
+package ru.stellarburgers.steps;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import ru.praktikum_services.stellar_burgers.test_data_constructors.CreateOrderData;
-import ru.praktikum_services.stellar_burgers.test_data_constructors.CreateUserData;
+import ru.stellarburgers.constructors.CreateOrderData;
+import ru.stellarburgers.constructors.CreateUserData;
 
 import static io.restassured.RestAssured.given;
 
